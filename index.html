@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Geek Museum — 极客博物馆</title>
+  <meta name="description" content="极客博物馆：向经典致敬的个人电子藏品。包括 Olympus OM-1 胶片相机、Apple II、Macintosh SE、Mac Pro 等。">
+  <meta property="og:title" content="Geek Museum — 极客博物馆">
+  <meta property="og:description" content="向经典致敬的个人电子藏品：Olympus OM-1、Apple II、Macintosh SE、Mac Pro 等。">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="assets/Macintosh.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f5f6f7">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="branding">
+        <div class="logo">
+          <img src="assets/logo.png" alt="Geek Museum logo">
+        </div>
+        <div>
+          <h1 class="title">Geek Museum</h1>
+          <p class="subtitle">极客博物馆</p>
+        </div>
+      </div>
+      <!-- Top navigation removed as requested -->
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2 class="hero-title">向经典致敬</h2>
+        <p class="lead">受苹果设计启发的极简展示：从胶片时代的 Olympus OM‑1，到早期个人电脑 Apple II、经典的 Macintosh SE，以及极具争议的圆柱形 Mac Pro。</p>
+      </div>
+    </section>
+
+    <section id="collection" class="container grid">
+      <!-- Card: Olympus OM-1 -->
+      <article class="card">
+        <button class="media" data-key="om1" data-src="assets/OM-1.jpg" aria-label="查看 Olympus OM‑1" aria-haspopup="dialog">
+          <picture>
+            <img src="assets/OM-1.jpg" alt="Olympus OM‑1 胶片相机" loading="lazy" sizes="(min-width: 900px) 240px, 50vw">
+          </picture>
+        </button>
+        <div class="card-body">
+          <h3>Olympus OM‑1</h3>
+          <p class="subtitle">机械美学 · 手动时代的纪念碑</p>
+          <p>经典 35mm 胶片相机，轻巧机身与清脆快门手感，凝结了对纯粹摄影的执念与乐趣。</p>
+          <ul class="meta">
+            <li><strong>类型</strong>：35mm 胶片相机</li>
+            <li><strong>年代</strong>：1970s</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Card: Macintosh SE -->
+      <article class="card">
+        <button class="media" data-key="macse" data-src="assets/Macintosh.jpg" aria-label="查看 Macintosh SE" aria-haspopup="dialog">
+          <picture>
+            <img src="assets/Macintosh.jpg" alt="Apple Macintosh SE" loading="lazy" sizes="(min-width: 900px) 240px, 50vw">
+          </picture>
+        </button>
+        <div class="card-body">
+          <h3>Macintosh SE</h3>
+          <p class="subtitle">一体化设计 · 经典麦金塔气质</p>
+          <p>延续 Macintosh 家族的一体化造型，紧凑又亲和，代表了图形界面与人机交互理念的早期探索。</p>
+          <ul class="meta">
+            <li><strong>类型</strong>：一体式个人电脑</li>
+            <li><strong>年代</strong>：1987</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Geek Museum · 极客博物馆</p>
+    </div>
+  </footer>
+
+  <!-- Modal for image preview -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <button id="modalClose" class="modal-close" aria-label="关闭">✕</button>
+    <div class="modal-content" role="dialog" aria-modal="true"></div>
+  </div>
+
+<script>
+// Modal：展示产品详情
+document.getElementById('year').textContent = new Date().getFullYear();
+const modal = document.getElementById('modal');
+const modalContent = modal.querySelector('.modal-content');
+const modalClose = document.getElementById('modalClose');
+
+const products = {
+  om1: {
+    name: 'Olympus OM‑1',
+    image: 'assets/OM-1.jpg',
+    price: '¥3,000（典藏二手，参考）',
+    release: '1972（系列：1970s）',
+    designer: 'Yoshihisa Maitani（前奥林巴斯传奇工程师）',
+    specs: [
+      '胶片格式：35mm',
+      '快门：机械式，B–1/1000s',
+      '测光：TTL 中央重点测光',
+      '卡口：OM 卡口',
+      '机身材质：镁合金/金属外壳'
+    ],
+    intro: '轻巧机身与清脆快门手感，体现机械时代对摄影的纯粹追求。'
+  },
+  macse: {
+    name: 'Macintosh SE',
+    image: 'assets/Macintosh.jpg',
+    price: 'US$2,898（1987 年发布价）',
+    release: '1987',
+    designer: 'Apple Industrial Design Group（受 Hartmut Esslinger 影响）',
+    specs: [
+      'CPU：Motorola 68000（8 MHz）',
+      '内存：1 MB（可扩展至 4 MB）',
+      '存储：800 KB 软驱，可选 20 MB 硬盘',
+      '显示：9 英寸黑白 CRT（512×342）',
+      '接口：ADB、SCSI'
+    ],
+    intro: '一体化外形与图形界面体验的代表作，亲和且高效。'
+  }
+};
+
+function openModalByKey(key){
+  const item = products[key];
+  if(!item){ return; }
+  const html = `
+    <div class="detail">
+      <img class="modal-img" src="${item.image}" alt="${item.name}">
+      <div class="detail-body">
+        <h3 class="detail-title">${item.name}</h3>
+        <p class="detail-intro">${item.intro}</p>
+        <div class="detail-grid">
+          <div>
+            <h4>核心参数</h4>
+            <ul class="specs">
+              ${item.specs.map(s => `<li>${s}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="meta-block">
+            <div class="kv"><span>价格</span><strong>${item.price}</strong></div>
+            <div class="kv"><span>上市时间</span><strong>${item.release}</strong></div>
+            <div class="kv"><span>设计师</span><strong>${item.designer}</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  modalContent.innerHTML = html;
+  modal.setAttribute('aria-hidden','false');
+  document.body.classList.add('no-scroll');
+}
+
+function closeModal(){
+  modal.setAttribute('aria-hidden','true');
+  modalContent.innerHTML = '';
+  document.body.classList.remove('no-scroll');
+}
+
+document.querySelectorAll('.media').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.dataset.key;
+    if(key && products[key]){
+      openModalByKey(key);
+    }else{
+      // 回退：仅展示图片
+      const src = btn.dataset.src;
+      const alt = btn.getAttribute('aria-label') || '';
+      modalContent.innerHTML = `<img class="modal-img" src="${src}" alt="${alt}">`;
+      modal.setAttribute('aria-hidden','false');
+      document.body.classList.add('no-scroll');
+    }
+  });
+});
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
