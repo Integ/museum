@@ -11,7 +11,7 @@
   <meta property="og:locale" content="zh_CN">
   <meta property="og:image" content="assets/Macintosh.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#f5f6f7">
+  <meta name="theme-color" content="#0a0a0c">
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -77,6 +77,55 @@
       </article>
     </section>
 
+    <!-- Designers Section -->
+    <section class="designers container">
+      <div class="designers-header">
+        <h2>背后的设计者</h2>
+        <p>这些经典产品背后，是设计师们对美学与功能的极致追求。他们用作品定义了时代。</p>
+      </div>
+      <div class="designers-grid">
+        <article class="designer-card">
+          <div class="designer-photo">
+            <img src="assets/Yoshihisa.jpg" alt="米谷美久" loading="lazy">
+          </div>
+          <h3 class="designer-name">米谷美久</h3>
+          <p class="designer-title">Yoshihisa Maitani</p>
+          <p class="designer-bio">
+            奥林巴斯传奇相机设计师，被誉为"相机设计的天才"。1933年出生于日本，1956年加入奥林巴斯。他追求"小即是美"的设计哲学，创造了多款划时代的相机。OM系列打破传统，将专业相机缩小到前所未有的体积，成为35mm单反相机的里程碑。
+          </p>
+          <div class="designer-works">
+            <h4>代表作品</h4>
+            <ul>
+              <li>Olympus OM-1 (1972)</li>
+              <li>Olympus PEN-F (1963)</li>
+              <li>Olympus XA (1979)</li>
+              <li>Olympus μ[mju:] (1991)</li>
+            </ul>
+          </div>
+        </article>
+        <article class="designer-card">
+          <div class="designer-photo">
+            <img src="assets/Jobs.webp" alt="史蒂夫·乔布斯" loading="lazy">
+          </div>
+          <h3 class="designer-name">史蒂夫·乔布斯</h3>
+          <p class="designer-title">Steve Jobs</p>
+          <p class="designer-bio">
+            Apple联合创始人、前CEO，被誉为"改变世界的梦想家"。1955-2011年。他将技术与人文完美结合，推动了个人电脑、智能手机和数字音乐的革命。Macintosh系列体现了他的设计理念：简洁、直观、优雅。他的"Think Different"哲学影响了一代又一代的产品设计。
+          </p>
+          <div class="designer-works">
+            <h4>代表作品</h4>
+            <ul>
+              <li>Apple II (1977)</li>
+              <li>Macintosh (1984)</li>
+              <li>iMac (1998)</li>
+              <li>iPhone (2007)</li>
+              <li>iPad (2010)</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -104,7 +153,7 @@ const products = {
     image: 'assets/OM-1.jpg',
     price: '¥3,000（典藏二手，参考）',
     release: '1972（系列：1970s）',
-    designer: 'Yoshihisa Maitani（前奥林巴斯传奇工程师）',
+    designer: '米谷美久（Yoshihisa Maitani）',
     specs: [
       '胶片格式：35mm',
       '快门：机械式，B–1/1000s',
@@ -119,7 +168,7 @@ const products = {
     image: 'assets/Macintosh.jpg',
     price: 'US$2,898（1987 年发布价）',
     release: '1987',
-    designer: 'Apple Industrial Design Group（受 Hartmut Esslinger 影响）',
+    designer: '史蒂夫·乔布斯（Steve Jobs）',
     specs: [
       'CPU：Motorola 68000（8 MHz）',
       '内存：1 MB（可扩展至 4 MB）',
