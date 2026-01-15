@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Geek Museum — 极客博物馆</title>
-  <meta name="description" content="极客博物馆：向经典致敬的个人电子藏品。包括 Olympus OM-1 胶片相机、Apple II、Macintosh SE、Mac Pro 等。">
+  <meta name="description" content="极客博物馆：向经典致敬的个人电子藏品。包括 Olympus OM-1 胶片相机、Apple II、Macintosh、Mac Pro 等。">
   <meta property="og:title" content="Geek Museum — 极客博物馆">
-  <meta property="og:description" content="向经典致敬的个人电子藏品：Olympus OM-1、Apple II、Macintosh SE、Mac Pro 等。">
+  <meta property="og:description" content="向经典致敬的个人电子藏品：Olympus OM-1、Apple II、Macintosh、Mac Pro 等。">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:image" content="assets/Macintosh.jpg">
@@ -35,7 +35,14 @@
     <section class="hero">
       <div class="container">
         <h2 class="hero-title">向经典致敬</h2>
-        <p class="lead">受苹果设计启发的极简展示：从胶片时代的 Olympus OM‑1，到早期个人电脑 Apple II、经典的 Macintosh SE，以及极具争议的圆柱形 Mac Pro。
+        <div class="lead">
+          <p class="lead-sub">在外观、功能与耐用性的完美平衡中，每一件藏品都诉说着设计师独特的创新精神</p>
+          <div class="lead-designers">
+            <span class="designer-item">米谷美久 · 机械美学追求</span>
+            <span class="designer-item">乔布斯 · 一体化设计理念</span>
+            <span class="designer-item">惠普团队 · 精密工艺执着</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -58,15 +65,15 @@
         </div>
       </article>
 
-      <!-- Card: Macintosh SE -->
+      <!-- Card: Macintosh -->
       <article class="card">
-        <button class="media" data-key="macse" data-src="assets/Macintosh.jpg" aria-label="查看 Macintosh SE" aria-haspopup="dialog">
+        <button class="media" data-key="macse" data-src="assets/Macintosh.jpg" aria-label="查看 Macintosh" aria-haspopup="dialog">
           <picture>
-            <img src="assets/Macintosh.jpg" alt="Apple Macintosh SE" loading="lazy" sizes="(min-width: 900px) 240px, 50vw">
+            <img src="assets/Macintosh.jpg" alt="Apple Macintosh" loading="lazy" sizes="(min-width: 900px) 240px, 50vw">
           </picture>
         </button>
         <div class="card-body">
-          <h3>Macintosh SE</h3>
+          <h3>Macintosh</h3>
           <p class="subtitle">一体化设计 · 经典麦金塔气质</p>
           <p>延续 Macintosh 家族的一体化造型，紧凑又亲和，代表了图形界面与人机交互理念的早期探索。</p>
           <ul class="meta">
@@ -78,9 +85,9 @@
 
       <!-- Card: HP 11C -->
       <article class="card">
-        <button class="media" data-key="hp11c" data-src="https://via.placeholder.com/240" aria-label="查看 HP 11C 科学计算器" aria-haspopup="dialog">
+        <button class="media" data-key="hp11c" data-src="assets/HP-11C.jpg" aria-label="查看 HP 11C 科学计算器" aria-haspopup="dialog">
           <picture>
-            <img src="https://via.placeholder.com/240" alt="HP 11C 科学计算器" loading="lazy" sizes="(min-width: 900px) 240px, 50vw">
+            <img src="assets/HP-11C.jpg" alt="HP 11C 科学计算器" loading="lazy" sizes="(min-width: 900px) 240px, 50vw">
           </picture>
         </button>
         <div class="card-body">
@@ -143,7 +150,7 @@
         </article>
         <article class="designer-card">
           <div class="designer-photo">
-            <img src="https://via.placeholder.com/150" alt="惠普计算器设计团队" loading="lazy">
+            <img src="assets/HP-Team.jpg" alt="惠普计算器设计团队" loading="lazy">
           </div>
           <h3 class="designer-name">惠普计算器团队</h3>
           <p class="designer-title">HP Calculator Team</p>
@@ -200,7 +207,7 @@ const products = {
     intro: '轻巧机身与清脆快门手感，体现机械时代对摄影的纯粹追求。'
   },
   macse: {
-    name: 'Macintosh SE',
+    name: 'Macintosh',
     image: 'assets/Macintosh.jpg',
     price: 'US$2,898（1987 年发布价）',
     release: '1987',
@@ -216,17 +223,19 @@ const products = {
   },
   hp11c: {
     name: 'HP 11C',
-    image: 'https://via.placeholder.com/240',
-    price: 'US$120（发布时价，参考）',
+    image: 'assets/HP-11C.jpg',
+    price: 'US$135（发布时价）',
     release: '1981',
     designer: '惠普计算器团队（HP Calculator Team）',
     specs: [
       '类型：科学计算器',
       '操作逻辑：逆波兰记法（RPN）',
       '尺寸：127x80x15mm',
-      '特殊功能：高效、省电'
+      '显示：10位LCD显示屏',
+      '程序存储：63-203行',
+      '特殊功能：随机数生成器、退格键'
     ],
-    intro: 'HP 11C 是工程师与科学计算的经典选择。'
+    intro: 'HP 11C 是工程师与科学计算的经典选择，以其耐用性和高效的逆波兰逻辑著称。'
   }
 };
 
