@@ -26,11 +26,15 @@
           <h1 class="title">Geek Museum</h1>
           <p class="subtitle">极客博物馆</p>
         </div>
-      </div>
-      <div class="language-switcher">
-        <button id="langToggle" class="lang-btn" aria-label="切换语言 / Switch Language">
-          <span class="lang-text">EN</span>
-        </button>
+        <div class="language-switcher">
+          <label class="lang-switch" for="langToggle">
+            <input type="checkbox" id="langToggle" aria-label="切换语言 / Switch Language">
+            <span class="lang-slider">
+              <span class="lang-option lang-zh">中</span>
+              <span class="lang-option lang-en">EN</span>
+            </span>
+          </label>
+        </div>
       </div>
     </div>
   </header>
@@ -320,7 +324,10 @@ function updateLanguage(lang) {
     if (cardData[index]) {
       card.querySelector('h3').textContent = cardData[index].title;
       card.querySelector('.subtitle').textContent = cardData[index].subtitle;
-      card.querySelector('p').textContent = cardData[index].desc;
+      const descParagraph = card.querySelector('.subtitle').nextElementSibling;
+      if (descParagraph && descParagraph.tagName === 'P') {
+        descParagraph.textContent = cardData[index].desc;
+      }
       const metaItems = card.querySelectorAll('.meta li');
       metaItems[0].innerHTML = `<strong>${t.typeLabel}</strong>: ${cardData[index].type}`;
       metaItems[1].innerHTML = `<strong>${t.yearLabel}</strong>: ${cardData[index].year}`;
@@ -353,8 +360,9 @@ function updateLanguage(lang) {
   // Update year display
   document.getElementById('year').textContent = new Date().getFullYear();
   
-  // Update language button
-  document.querySelector('.lang-text').textContent = lang === 'zh' ? 'EN' : '中文';
+  // Update language switch state
+  const langToggle = document.getElementById('langToggle');
+  langToggle.checked = lang === 'zh';
   
   // Update page title and meta tags
   if (lang === 'en') {
@@ -376,8 +384,8 @@ function updateLanguage(lang) {
 }
 
 // Language toggle
-document.getElementById('langToggle').addEventListener('click', () => {
-  const newLang = currentLang === 'zh' ? 'en' : 'zh';
+document.getElementById('langToggle').addEventListener('change', (e) => {
+  const newLang = e.target.checked ? 'zh' : 'en';
   updateLanguage(newLang);
 });
 
