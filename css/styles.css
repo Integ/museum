@@ -52,6 +52,39 @@ body{
 .title{margin:0;font-size:24px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,var(--accent),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .subtitle{margin:0;color:var(--muted);font-size:14px;font-weight:400}
 
+/* Language Switcher */
+.language-switcher{margin-left:auto}
+.lang-btn{
+  background:var(--card);
+  border:1px solid var(--border);
+  color:var(--accent);
+  padding:8px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:500;
+  transition:all 0.2s;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.lang-btn:hover{
+  background:var(--card-hover);
+  border-color:var(--primary);
+  transform:translateY(-1px);
+}
+.lang-btn:focus{
+  outline:none;
+}
+.lang-btn:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:2px;
+}
+.lang-text{
+  font-family:"SF Mono",Monaco,Consolas,"Courier New",monospace;
+  font-weight:600;
+}
+
 .hero{
   padding:60px 0 40px;
   text-align:center;

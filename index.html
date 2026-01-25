@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" id="html-root">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,7 +27,11 @@
           <p class="subtitle">极客博物馆</p>
         </div>
       </div>
-      <!-- Top navigation removed as requested -->
+      <div class="language-switcher">
+        <button id="langToggle" class="lang-btn" aria-label="切换语言 / Switch Language">
+          <span class="lang-text">EN</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -184,6 +188,199 @@
   </div>
 
 <script>
+// Language switching
+const translations = {
+  zh: {
+    title: "Geek Museum",
+    subtitle: "极客博物馆",
+    heroTitle: "向经典致敬",
+    heroSubtitle: "在外观、功能与耐用性的完美平衡中，每一件藏品都诉说着设计师独特的创新精神",
+    designerMaitani: "米谷美久 · 机械美学追求",
+    designerJobs: "乔布斯 · 一体化设计理念",
+    designerHP: "惠普团队 · 精密工艺执着",
+    designersTitle: "背后的设计者",
+    designersDesc: "这些经典产品背后，是设计师们对美学与功能的极致追求。他们用作品定义了时代。",
+    om1Title: "Olympus OM‑1",
+    om1Subtitle: "机械美学 · 手动时代的纪念碑",
+    om1Desc: "经典 35mm 胶片相机，轻巧机身与清脆快门手感，凝结了对纯粹摄影的执念与乐趣。",
+    om1Type: "35mm 胶片相机",
+    om1Year: "1970s",
+    macTitle: "Macintosh",
+    macSubtitle: "一体化设计 · 经典麦金塔气质",
+    macDesc: "延续 Macintosh 家族的一体化造型，紧凑又亲和，代表了图形界面与人机交互理念的早期探索。",
+    macType: "一体式个人电脑",
+    macYear: "1987",
+    hpTitle: "HP 11C",
+    hpSubtitle: "高效便携 · 逆波兰记法的经典代表",
+    hpDesc: "HP 11C 是惠普 Voyager 系列的成员，专为工程师和科学计算设计，提供了高精准度、持久电池寿命以及独特的逆波兰操作逻辑。",
+    hpType: "科学计算器",
+    hpYear: "1981",
+    typeLabel: "类型",
+    yearLabel: "年代",
+    closeModal: "关闭",
+    maitaniName: "米谷美久",
+    maitaniTitle: "Yoshihisa Maitani",
+    maitaniBio: "奥林巴斯传奇相机设计师，被誉为\"相机设计的天才\"。1933年出生于日本，1956年加入奥林巴斯。他追求\"小即是美\"的设计哲学，创造了多款划时代的产品。",
+    maitaniWorks: "代表作品",
+    jobsName: "史蒂夫·乔布斯",
+    jobsTitle: "Steve Jobs",
+    jobsBio: "Apple联合创始人、前CEO，被誉为\"改变世界的梦想家\"。1955-2011年。他将技术与人文完美结合，推动了个人电脑、智能手机和数字音乐的革命。",
+    jobsWorks: "代表作品",
+    hpTeamName: "惠普计算器团队",
+    hpTeamTitle: "HP Calculator Team",
+    hpTeamBio: "HP 计算器团队致力于将尖端技术与用户友好性结合，打造了多款经典计算器，其中包括 HP 11C。这些设备因其耐用性、创新性和高效的逆波兰逻辑而著称。",
+    hpTeamWorks: "代表作品",
+    copyright: "Geek Museum · 极客博物馆",
+    // Modal translations
+    coreSpecs: "核心参数",
+    price: "价格",
+    releaseTime: "上市时间",
+    designer: "设计师"
+  },
+  en: {
+    title: "Geek Museum",
+    subtitle: "A Collection of Classic Tech",
+    heroTitle: "A Tribute to Classics",
+    heroSubtitle: "In the perfect balance of design, functionality, and durability, each collection item tells the unique innovative spirit of its designer",
+    designerMaitani: "Maitani · Pursuit of Mechanical Aesthetics",
+    designerJobs: "Jobs · Integrated Design Philosophy",
+    designerHP: "HP Team · Dedication to Precision Engineering",
+    designersTitle: "The Designers Behind",
+    designersDesc: "Behind these classic products are designers who pursued the ultimate in aesthetics and functionality. They defined eras with their work.",
+    om1Title: "Olympus OM‑1",
+    om1Subtitle: "Mechanical Aesthetics · Monument of Manual Era",
+    om1Desc: "Classic 35mm film camera with lightweight body and crisp shutter feel, embodying the pursuit and joy of pure photography.",
+    om1Type: "35mm Film Camera",
+    om1Year: "1970s",
+    macTitle: "Macintosh",
+    macSubtitle: "Integrated Design · Classic Macintosh Spirit",
+    macDesc: "Continuing the Macintosh family's integrated form, compact and approachable, representing the early exploration of graphical interfaces and human-computer interaction concepts.",
+    macType: "All-in-One Personal Computer",
+    macYear: "1987",
+    hpTitle: "HP 11C",
+    hpSubtitle: "Efficient & Portable · Classic RPN Representative",
+    hpDesc: "The HP 11C is a member of HP's Voyager series, designed for engineers and scientific computing, offering high precision, long battery life, and unique Reverse Polish Notation logic.",
+    hpType: "Scientific Calculator",
+    hpYear: "1981",
+    typeLabel: "Type",
+    yearLabel: "Era",
+    closeModal: "Close",
+    maitaniName: "Yoshihisa Maitani",
+    maitaniTitle: "Yoshihisa Maitani",
+    maitaniBio: "Legendary Olympus camera designer, known as the \"genius of camera design.\" Born in Japan in 1933, joined Olympus in 1956. He pursued the design philosophy of \"small is beautiful\" and created multiple groundbreaking products.",
+    maitaniWorks: "Notable Works",
+    jobsName: "Steve Jobs",
+    jobsTitle: "Steve Jobs",
+    jobsBio: "Apple co-founder and former CEO, known as the \"dreamer who changed the world.\" 1955-2011. He perfectly combined technology and humanities, driving revolutions in personal computers, smartphones, and digital music.",
+    jobsWorks: "Notable Works",
+    hpTeamName: "HP Calculator Team",
+    hpTeamTitle: "HP Calculator Team",
+    hpTeamBio: "The HP Calculator Team dedicated themselves to combining cutting-edge technology with user-friendliness, creating multiple classic calculators including the HP 11C. These devices are known for their durability, innovation, and efficient RPN logic.",
+    hpTeamWorks: "Notable Works",
+    copyright: "Geek Museum",
+    // Modal translations
+    coreSpecs: "Core Specifications",
+    price: "Price",
+    releaseTime: "Release",
+    designer: "Designer"
+  }
+};
+
+let currentLang = 'zh';
+
+function updateLanguage(lang) {
+  const t = translations[lang];
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  
+  // Update header
+  document.querySelector('.title').textContent = t.title;
+  document.querySelector('.subtitle').textContent = t.subtitle;
+  
+  // Update hero section
+  document.querySelector('.hero-title').textContent = t.heroTitle;
+  document.querySelector('.lead-sub').textContent = t.heroSubtitle;
+  const designerItems = document.querySelectorAll('.designer-item');
+  designerItems[0].textContent = t.designerMaitani;
+  designerItems[1].textContent = t.designerJobs;
+  designerItems[2].textContent = t.designerHP;
+  
+  // Update designers section
+  document.querySelector('.designers-header h2').textContent = t.designersTitle;
+  document.querySelector('.designers-header p').textContent = t.designersDesc;
+  
+  // Update cards
+  const cards = document.querySelectorAll('.card');
+  const cardData = [
+    { title: t.om1Title, subtitle: t.om1Subtitle, desc: t.om1Desc, type: t.om1Type, year: t.om1Year },
+    { title: t.macTitle, subtitle: t.macSubtitle, desc: t.macDesc, type: t.macType, year: t.macYear },
+    { title: t.hpTitle, subtitle: t.hpSubtitle, desc: t.hpDesc, type: t.hpType, year: t.hpYear }
+  ];
+  
+  cards.forEach((card, index) => {
+    if (cardData[index]) {
+      card.querySelector('h3').textContent = cardData[index].title;
+      card.querySelector('.subtitle').textContent = cardData[index].subtitle;
+      card.querySelector('p').textContent = cardData[index].desc;
+      const metaItems = card.querySelectorAll('.meta li');
+      metaItems[0].innerHTML = `<strong>${t.typeLabel}</strong>: ${cardData[index].type}`;
+      metaItems[1].innerHTML = `<strong>${t.yearLabel}</strong>: ${cardData[index].year}`;
+    }
+  });
+  
+  // Update designer cards
+  const designerCards = document.querySelectorAll('.designer-card');
+  const designerData = [
+    { name: t.maitaniName, title: t.maitaniTitle, bio: t.maitaniBio, works: t.maitaniWorks },
+    { name: t.jobsName, title: t.jobsTitle, bio: t.jobsBio, works: t.jobsWorks },
+    { name: t.hpTeamName, title: t.hpTeamTitle, bio: t.hpTeamBio, works: t.hpTeamWorks }
+  ];
+  
+  designerCards.forEach((card, index) => {
+    if (designerData[index]) {
+      card.querySelector('.designer-name').textContent = designerData[index].name;
+      card.querySelector('.designer-title').textContent = designerData[index].title;
+      card.querySelector('.designer-bio').textContent = designerData[index].bio;
+      card.querySelector('.designer-works h4').textContent = designerData[index].works;
+    }
+  });
+  
+  // Update footer
+  document.querySelector('.site-footer p').innerHTML = `© <span id="year"></span> ${t.copyright}`;
+  
+  // Update modal close button
+  document.getElementById('modalClose').setAttribute('aria-label', t.closeModal);
+  
+  // Update year display
+  document.getElementById('year').textContent = new Date().getFullYear();
+  
+  // Update language button
+  document.querySelector('.lang-text').textContent = lang === 'zh' ? 'EN' : '中文';
+  
+  // Update page title and meta tags
+  if (lang === 'en') {
+    document.title = 'Geek Museum — A Collection of Classic Tech';
+    document.querySelector('meta[name="description"]').content = 'Geek Museum: A personal collection paying tribute to classic technology. Including Olympus OM-1 film camera, Apple II, Macintosh, Mac Pro and more.';
+    document.querySelector('meta[property="og:title"]').content = 'Geek Museum — A Collection of Classic Tech';
+    document.querySelector('meta[property="og:description"]').content = 'A personal collection of classic technology: Olympus OM-1, Apple II, Macintosh, Mac Pro and more.';
+    document.querySelector('meta[property="og:locale"]').content = 'en_US';
+  } else {
+    document.title = 'Geek Museum — 极客博物馆';
+    document.querySelector('meta[name="description"]').content = '极客博物馆：向经典致敬的个人电子藏品。包括 Olympus OM-1 胶片相机、Apple II、Macintosh、Mac Pro 等。';
+    document.querySelector('meta[property="og:title"]').content = 'Geek Museum — 极客博物馆';
+    document.querySelector('meta[property="og:description"]').content = '向经典致敬的个人电子藏品：Olympus OM-1、Apple II、Macintosh、Mac Pro 等。';
+    document.querySelector('meta[property="og:locale"]').content = 'zh_CN';
+  }
+  
+  currentLang = lang;
+  localStorage.setItem('language', lang);
+}
+
+// Language toggle
+document.getElementById('langToggle').addEventListener('click', () => {
+  const newLang = currentLang === 'zh' ? 'en' : 'zh';
+  updateLanguage(newLang);
+});
+
 // Modal：展示产品详情
 document.getElementById('year').textContent = new Date().getFullYear();
 const modal = document.getElementById('modal');
@@ -192,73 +389,111 @@ const modalClose = document.getElementById('modalClose');
 
 const products = {
   om1: {
-    name: 'Olympus OM‑1',
+    name: { zh: 'Olympus OM‑1', en: 'Olympus OM‑1' },
     image: 'assets/OM-1.jpg',
-    price: '¥3,000（典藏二手，参考）',
-    release: '1972（系列：1970s）',
-    designer: '米谷美久（Yoshihisa Maitani）',
-    specs: [
-      '胶片格式：35mm',
-      '快门：机械式，B–1/1000s',
-      '测光：TTL 中央重点测光',
-      '卡口：OM 卡口',
-      '机身材质：镁合金/金属外壳'
-    ],
-    intro: '轻巧机身与清脆快门手感，体现机械时代对摄影的纯粹追求。'
+    price: { zh: '¥3,000（典藏二手，参考）', en: '¥3,000 (Collector\'s used, reference)' },
+    release: { zh: '1972（系列：1970s）', en: '1972 (Series: 1970s)' },
+    designer: { zh: '米谷美久（Yoshihisa Maitani）', en: 'Yoshihisa Maitani' },
+    specs: {
+      zh: [
+        '胶片格式：35mm',
+        '快门：机械式，B–1/1000s',
+        '测光：TTL 中央重点测光',
+        '卡口：OM 卡口',
+        '机身材质：镁合金/金属外壳'
+      ],
+      en: [
+        'Film Format: 35mm',
+        'Shutter: Mechanical, B–1/1000s',
+        'Metering: TTL Center-weighted',
+        'Mount: OM Mount',
+        'Body Material: Magnesium alloy/metal housing'
+      ]
+    },
+    intro: { 
+      zh: '轻巧机身与清脆快门手感，体现机械时代对摄影的纯粹追求。',
+      en: 'Lightweight body with crisp shutter feel, embodying the mechanical era\'s pure pursuit of photography.'
+    }
   },
   macse: {
-    name: 'Macintosh',
+    name: { zh: 'Macintosh', en: 'Macintosh' },
     image: 'assets/Macintosh.jpg',
-    price: 'US$2,898（1987 年发布价）',
-    release: '1987',
-    designer: '史蒂夫·乔布斯（Steve Jobs）',
-    specs: [
-      'CPU：Motorola 68000（8 MHz）',
-      '内存：1 MB（可扩展至 4 MB）',
-      '存储：800 KB 软驱，可选 20 MB 硬盘',
-      '显示：9 英寸黑白 CRT（512×342）',
-      '接口：ADB、SCSI'
-    ],
-    intro: '一体化外形与图形界面体验的代表作，亲和且高效。'
+    price: { zh: 'US$2,898（1987 年发布价）', en: 'US$2,898 (1987 launch price)' },
+    release: { zh: '1987', en: '1987' },
+    designer: { zh: '史蒂夫·乔布斯（Steve Jobs）', en: 'Steve Jobs' },
+    specs: {
+      zh: [
+        'CPU：Motorola 68000（8 MHz）',
+        '内存：1 MB（可扩展至 4 MB）',
+        '存储：800 KB 软驱，可选 20 MB 硬盘',
+        '显示：9 英寸黑白 CRT（512×342）',
+        '接口：ADB、SCSI'
+      ],
+      en: [
+        'CPU: Motorola 68000 (8 MHz)',
+        'Memory: 1 MB (expandable to 4 MB)',
+        'Storage: 800 KB floppy, optional 20 MB hard drive',
+        'Display: 9-inch B&W CRT (512×342)',
+        'Ports: ADB, SCSI'
+      ]
+    },
+    intro: { 
+      zh: '一体化外形与图形界面体验的代表作，亲和且高效。',
+      en: 'Iconic integrated form factor and GUI experience, approachable and efficient.'
+    }
   },
   hp11c: {
-    name: 'HP 11C',
+    name: { zh: 'HP 11C', en: 'HP 11C' },
     image: 'assets/HP-11C.jpg',
-    price: 'US$135（发布时价）',
-    release: '1981',
-    designer: '惠普计算器团队（HP Calculator Team）',
-    specs: [
-      '类型：科学计算器',
-      '操作逻辑：逆波兰记法（RPN）',
-      '尺寸：127x80x15mm',
-      '显示：10位LCD显示屏',
-      '程序存储：63-203行',
-      '特殊功能：随机数生成器、退格键'
-    ],
-    intro: 'HP 11C 是工程师与科学计算的经典选择，以其耐用性和高效的逆波兰逻辑著称。'
+    price: { zh: 'US$135（发布时价）', en: 'US$135 (Launch price)' },
+    release: { zh: '1981', en: '1981' },
+    designer: { zh: '惠普计算器团队（HP Calculator Team）', en: 'HP Calculator Team' },
+    specs: {
+      zh: [
+        '类型：科学计算器',
+        '操作逻辑：逆波兰记法（RPN）',
+        '尺寸：127x80x15mm',
+        '显示：10位LCD显示屏',
+        '程序存储：63-203行',
+        '特殊功能：随机数生成器、退格键'
+      ],
+      en: [
+        'Type: Scientific Calculator',
+        'Logic: Reverse Polish Notation (RPN)',
+        'Dimensions: 127x80x15mm',
+        'Display: 10-digit LCD',
+        'Program Memory: 63-203 lines',
+        'Special Functions: Random number generator, backspace key'
+      ]
+    },
+    intro: { 
+      zh: 'HP 11C 是工程师与科学计算的经典选择，以其耐用性和高效的逆波兰逻辑著称。',
+      en: 'The HP 11C is a classic choice for engineers and scientific computing, known for its durability and efficient RPN logic.'
+    }
   }
 };
 
 function openModalByKey(key){
   const item = products[key];
   if(!item){ return; }
+  const t = translations[currentLang];
   const html = `
     <div class="detail">
-      <img class="modal-img" src="${item.image}" alt="${item.name}">
+      <img class="modal-img" src="${item.image}" alt="${item.name[currentLang]}">
       <div class="detail-body">
-        <h3 class="detail-title">${item.name}</h3>
-        <p class="detail-intro">${item.intro}</p>
+        <h3 class="detail-title">${item.name[currentLang]}</h3>
+        <p class="detail-intro">${item.intro[currentLang]}</p>
         <div class="detail-grid">
           <div>
-            <h4>核心参数</h4>
+            <h4>${t.coreSpecs}</h4>
             <ul class="specs">
-              ${item.specs.map(s => `<li>${s}</li>`).join('')}
+              ${item.specs[currentLang].map(s => `<li>${s}</li>`).join('')}
             </ul>
           </div>
           <div class="meta-block">
-            <div class="kv"><span>价格</span><strong>${item.price}</strong></div>
-            <div class="kv"><span>上市时间</span><strong>${item.release}</strong></div>
-            <div class="kv"><span>设计师</span><strong>${item.designer}</strong></div>
+            <div class="kv"><span>${t.price}</span><strong>${item.price[currentLang]}</strong></div>
+            <div class="kv"><span>${t.releaseTime}</span><strong>${item.release[currentLang]}</strong></div>
+            <div class="kv"><span>${t.designer}</span><strong>${item.designer[currentLang]}</strong></div>
           </div>
         </div>
       </div>
@@ -273,6 +508,12 @@ function closeModal(){
   modalContent.innerHTML = '';
   document.body.classList.remove('no-scroll');
 }
+
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLang = localStorage.getItem('language') || 'zh';
+  updateLanguage(savedLang);
+});
 
 document.querySelectorAll('.media').forEach(btn => {
   btn.addEventListener('click', () => {
